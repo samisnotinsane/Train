@@ -1,0 +1,31 @@
+TrainId|Station|ActualDepartureTime|DriverName|DepartureLatenessInSeconds
+2F29|London Waterloo|2018-09-04T14:30:00|John Scott|0
+2F29|Vauxhall|2018-09-04T14:35:00|John Scott|15
+2D29|London Waterloo|2018-09-04T14:32:00|John Major|30
+2D29|Vauxhall|2018-09-04T14:35:00|John Major|30
+5Y41|London Waterloo|2018-09-04T14:35:00|Andrew Lees|10
+5Y41|Vauxhall|2018-09-04T14:40:00|Andrew Lees|20
+2C33|London Waterloo|2018-09-04T14:40:00|Barry Williams|120
+2C33|Vauxhall|2018-09-04T14:44:00|Barry Williams|110
+2C33|Clapham Junction|2018-09-04T14:52:00|Barry Williams|90
+2D29|Clapham Junction|2018-09-04T14:40:00|John Major|30
+2D29|Wimbledon|2018-09-04T14:50:00|John Major|30
+2D29|Epsom|2018-09-04T14:55:00|John Major|30
+2D29|Guildford|2018-09-04T15:04:00|John Major|NA
+2F29|Clapham Junction|2018-09-04T14:47:00|John Scott|30
+2F29|Wimbledon|2018-09-04T14:59:00|John Scott|40
+2F29|Surbiton|2018-09-04T15:08:00|John Scott|20
+2F29|Esher|2018-09-04T15:13:00|Shane Watson|180
+2C33|Richmond|2018-09-04T14:59:00|Barry Williams|30
+2C33|Twickenham|2018-09-04T15:09:00|Barry Williams|20
+2F29|Hersham|2018-09-04T15:22:00|Shane Watson|150
+2F29|Walton on Thames|2018-09-04T15:35:00|Shane Watson|120
+2F29|Weybridge|2018-09-04T15:44:00|Shane Watson|100
+2C33|Feltham|2018-09-04T15:15:00|Barry Williams|10
+2C33|Staines|2018-09-04T15:22:00|Barry Williams|0
+5Y41|Clapham Yard|2018-09-04T14:50:00|Andrew Lees|40
+5Y41|Clapham Yard Sidings|2018-09-04T14:58:00|Andrew Lees|NA
+2C33|Virginia Water|2018-09-04T15:27:00|Alastair Philps|60
+2C33|Sunningdale|2018-09-04T15:35:00|Alastair Philps|30
+2C33|Wokingham|2018-09-04T15:44:00|Alastair Philps|20
+2C33|Winnersh|2018-09-04T15:56:00|Alastair Philps|0
