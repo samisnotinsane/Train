@@ -1,8 +1,5 @@
 package info.sameen;
 
-/**
- * Created by sameen on 16/09/2018.
- */
 public class TrainDetail {
 
     private String trainType;
@@ -10,7 +7,7 @@ public class TrainDetail {
     private int speed;
     private int energy;
 
-    public TrainDetail(String trainType, int gear, int speed, int energy) {
+    TrainDetail(String trainType, int gear, int speed, int energy) {
         this.trainType = trainType;
         this.gear = gear;
         this.speed = speed;

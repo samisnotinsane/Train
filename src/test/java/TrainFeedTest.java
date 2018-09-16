@@ -6,9 +6,6 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by sameen on 15/09/2018.
- */
 public class TrainFeedTest {
 
     private TrainFeed feed;
@@ -20,11 +17,6 @@ public class TrainFeedTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @After
-    public void tearDown() {
-
     }
 
     @Test
@@ -57,30 +49,44 @@ public class TrainFeedTest {
 
     @Test
     public void testMaxSpeedStrInvalid() {
-        TrainDetail td = feed.getFeed().get(0);
 
         assertEquals("No details found", feed.maxSpeedStr("1111", -1));
     }
 
     @Test
     public void testMaxSpeedStrValidOne() {
-        TrainDetail td = feed.getFeed().get(0);
 
         assertEquals("45", feed.maxSpeedStr("201V", 2));
     }
 
     @Test
     public void testMaxSpeedStrValidTwo() {
-        TrainDetail td = feed.getFeed().get(0);
 
         assertEquals("40", feed.maxSpeedStr("201V", 1));
     }
 
     @Test
     public void testMaxSpeedStrValidThree() {
-        TrainDetail td = feed.getFeed().get(0);
 
         assertEquals("50", feed.maxSpeedStr("157P", 2));
+    }
+
+    @Test
+    public void testMinEnergyInvalid() {
+
+        assertEquals("No details found", feed.minEnergyStr(0));
+    }
+
+    @Test
+    public void testMinEnergyByGearOne() {
+
+        assertEquals("157P", feed.minEnergyStr(1)); // energy rating: 40
+    }
+
+    @Test
+    public void testMinEnergyByGearTwo() {
+
+        assertEquals("156A", feed.minEnergyStr(2)); // energy rating: 80
     }
 
 }
