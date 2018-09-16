@@ -4,74 +4,64 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sameen on 15/09/2018.
  */
 public class TrainFeed {
 
-    private String trainType;
-    private int gear;
-    private int speed;
-    private int energy;
+    private List<TrainDetail> feed;
 
-    public static TrainFeed load() {
-        TrainFeed tf = null;
+    public TrainFeed() throws IOException {
+        this.feed = new ArrayList<TrainDetail>();
         File trainFile = new File("dat/TrainDetailsFeed.txt");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(trainFile));
-
-            String line = "";
-            while( ( line = br.readLine() ) != null ) {
-                String[] data = line.split("-");
-                tf = new TrainFeed(data[0], Integer.parseInt(data[1]),
-                        Integer.parseInt(data[2]), Integer.parseInt(data[3]));
-            }
-        } catch (IOException e) {
-            System.err.print("File not found!");
+        BufferedReader br = new BufferedReader(new FileReader(trainFile));
+        br.readLine(); // consume header line
+        String line = "";
+        while( ( line = br.readLine() ) != null ) {
+            String[] data = line.split("-");
+            feed.add(new TrainDetail(data[0], Integer.parseInt(data[1]),
+                    Integer.parseInt(data[2]), Integer.parseInt(data[3])));
         }
-        return tf;
     }
 
-    public TrainFeed() {
+    private boolean isValidGear(int gear) {
+        return gear > 0;
     }
 
-    public TrainFeed(String trainType, int gear, int speed, int energy) {
-        this.trainType = trainType;
-        this.gear = gear;
-        this.speed = speed;
-        this.energy = energy;
+    private boolean isValidTrainType(String trainType) {
+        return trainType.length() == 4;
     }
 
-    public String getTrainType() {
-        return trainType;
+    private int maxSpeed(String trainType, int gear) {
+        int highestSpeedSoFar = -1;
+        for(TrainDetail detail : feed) {
+            if( (detail.getTrainType().equals(trainType)) && (detail.getGear() == gear)) {
+                int speed = detail.getSpeed();
+                if(speed > highestSpeedSoFar) {
+                    highestSpeedSoFar = speed;
+                }
+            }
+        }
+        return highestSpeedSoFar;
     }
 
-    public void setTrainType(String trainType) {
-        this.trainType = trainType;
+    public String maxSpeedStr(String trainType, int gear) {
+        if(isValidTrainType(trainType) && isValidGear(gear)) {
+            int maxSpeed = maxSpeed(trainType, gear);
+            if(maxSpeed != -1) {
+                return Integer.toString(maxSpeed);
+            } else {
+                return "No details found";
+            }
+
+        }
+        return "No details found";
     }
 
-    public int getGear() {
-        return gear;
-    }
-
-    public void setGear(int gear) {
-        this.gear = gear;
-    }
-
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
-
-    public int getEnergy() {
-        return energy;
-    }
-
-    public void setEnergy(int energy) {
-        this.energy = energy;
+    public List<TrainDetail> getFeed() {
+        return feed;
     }
 }
