@@ -1,4 +1,4 @@
-package info.sameen;
+package info.sameen.model;
 
 import java.io.BufferedReader;
 import java.io.File;

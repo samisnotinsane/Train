@@ -1,5 +1,5 @@
-import info.sameen.TrainDetail;
-import info.sameen.TrainFeed;
+import info.sameen.model.TrainDetail;
+import info.sameen.model.TrainFeed;
 import org.junit.*;
 
 import java.io.IOException;

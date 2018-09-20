@@ -1,4 +1,4 @@
-package info.sameen;
+package info.sameen.model;
 
 public class TrainDetail {
 
