@@ -10,4 +10,12 @@ public class Three {
     public static void main(String[] args) {
         DepartureFeed depFeed = new DepartureFeed();
     }
+
+    public void insertDbDriver() {
+
+    }
+
+    public void insertDbDelay() {
+
+    }
 }

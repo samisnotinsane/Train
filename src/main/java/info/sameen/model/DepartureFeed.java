@@ -1,5 +1,7 @@
 package info.sameen.model;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,22 +20,35 @@ public class DepartureFeed {
         }
     }
 
+    public List<Departure> lateDepartures() {
+        List<Departure> lateDepartures = new ArrayList<>();
+
+        for(Departure d : this.departures) {
+            if (!d.getDepartureLateness().equals("NA")) {
+                lateDepartures.add(d);
+            }
+        }
+
+        return lateDepartures;
+    }
+
+    /**
+     * Caution: This method is not yet functional.
+     * @deprecated
+     * @return
+     */
     public List<Departure> completedJourneys() {
         List<Departure> completedJourneys = new ArrayList<>();
         for (Departure departure : this.departures) {
             for (Departure dep : this.departures) {
 
+                // Stuck: not sure how I can determine
+                // a train journey is complete given the data in DriverAndDelayDetails.txt
+                throw new NotImplementedException();
+
             }
         }
         return completedJourneys;
-    }
-
-    public void insertDbDriver() {
-
-    }
-
-    public void insertDbDelay() {
-
     }
 
     private void loadFileData(File file) {
