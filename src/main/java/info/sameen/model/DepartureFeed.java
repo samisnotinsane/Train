@@ -18,6 +18,24 @@ public class DepartureFeed {
         }
     }
 
+    public List<Departure> completedJourneys() {
+        List<Departure> completedJourneys = new ArrayList<>();
+        for (Departure departure : this.departures) {
+            for (Departure dep : this.departures) {
+
+            }
+        }
+        return completedJourneys;
+    }
+
+    public void insertDbDriver() {
+
+    }
+
+    public void insertDbDelay() {
+
+    }
+
     private void loadFileData(File file) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));

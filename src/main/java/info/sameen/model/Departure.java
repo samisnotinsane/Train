@@ -19,6 +19,26 @@ public class Departure {
         this.departureLateness = departureLateness;
     }
 
+    public String getTrainId() {
+        return trainId;
+    }
+
+    public String getStation() {
+        return station;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public String getDepartureLateness() {
+        return departureLateness;
+    }
+
     @Override
     public String toString() {
         return "Departure{" +
