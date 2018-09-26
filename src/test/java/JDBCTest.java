@@ -72,6 +72,17 @@ public class JDBCTest {
     }
 
     @Test
+    public void testDriverDBApiStation() {
+        String[] row = new String[4]; // [train_id, station, driver_name, journey_status]
+        try {
+            row = this.db.getAllDriverDetailsRows().get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        assertEquals("London Waterloo", row[1]);
+    }
+
+    @Test
     public void testDriverDBStation() {
 
         assertEquals("London Waterloo",
