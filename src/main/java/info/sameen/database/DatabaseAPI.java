@@ -2,12 +2,9 @@ package info.sameen.database;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DatabaseAPI {
@@ -25,8 +22,10 @@ public class DatabaseAPI {
     }
 
     public boolean connect() throws SQLException {
-        this.connection = DriverManager.getConnection(URL);
-        this.isConnected = true;
+        if (this.connection == null) {
+            this.connection = DriverManager.getConnection(URL);
+            this.isConnected = true;
+        }
         return isConnected;
     }
 
@@ -36,6 +35,35 @@ public class DatabaseAPI {
             this.isConnected = false;
         }
         return this.isConnected;
+    }
+
+    public List<String[]> getAllDriverDetailsRows() throws SQLException {
+        List<String[]> rows = new ArrayList<>();
+
+        this.connect();
+        String sqlString = "SELECT train_id, station, driver_name, journey_status FROM train_driver_details";
+        try(Connection connection = this.connection;
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlString)) {
+
+            while(resultSet.next()) {
+                String[] row = new String[4];
+
+                String trainId = resultSet.getString("train_id");
+                String station = resultSet.getString("station");
+                String driverName = resultSet.getString("driver_name");
+                String journeyStatus = resultSet.getString("journey_status");
+
+                row[0] = trainId;
+                row[1] = station;
+                row[2] = driverName;
+                row[3] = journeyStatus;
+
+                rows.add(row);
+            }
+        }
+
+        return rows;
     }
 
     public void insert_delay(String train_id, String station, String departure_time, String departure_lateness) {
