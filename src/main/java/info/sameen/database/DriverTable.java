@@ -18,7 +18,21 @@ public class DriverTable {
     }
 
     private void loadRowsFromDb() {
+        // TODO: Departure lateness is a questionable field in this context. Rethink.
+        try {
+            List<String[]> rawRows = this.db.getAllDriverDetailsRows();
+            for (String[] rawRow : rawRows) {
+                // [train_id, station, driver_name, journey_status]
+                this.rows.add(
+                        new Departure(
+                                rawRow[0], rawRow[1], null, rawRow[2], null
+                        )
+                );
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
