@@ -1,5 +1,7 @@
 package info.sameen.database;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,16 +18,12 @@ public class MySqlApi {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    public MySqlApi() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connect = DriverManager
-                    .getConnection("jdbc:mysql://localhost/feedback?"
-                            + "user=sqluser&password=sqluserpw");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public MySqlApi() throws SQLException {
+        String url = "jdbc:sqlite:C://sqlite/db/train.db";
+        connect = DriverManager.getConnection(url);
+    }
+
+    public void insert_delay(String train_id, String station, String departure_time, String departure_lateness) {
+        throw new NotImplementedException();
     }
 }

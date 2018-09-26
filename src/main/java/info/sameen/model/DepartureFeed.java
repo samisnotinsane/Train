@@ -1,23 +1,27 @@
 package info.sameen.model;
 
+import info.sameen.database.DriverTable;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DepartureFeed {
 
     private List<Departure> departures;
+    private DriverTable driverTable;
 
     public DepartureFeed() {
         this.departures = new ArrayList<>();
 
         loadFileData(new File("dat/DriverAndDelayDetails.txt"));
 
-        for (Departure departure : this.departures) {
-            System.out.println(departure.toString());
-        }
+//        for (Departure departure : this.departures) {
+//            System.out.println(departure.toString());
+//        }
     }
 
     public List<Departure> lateDepartures() {
@@ -39,16 +43,17 @@ public class DepartureFeed {
      */
     public List<Departure> completedJourneys() {
         List<Departure> completedJourneys = new ArrayList<>();
-        for (Departure departure : this.departures) {
-            for (Departure dep : this.departures) {
 
-                // Stuck: not sure how I can determine
-                // a train journey is complete given the data in DriverAndDelayDetails.txt
-                throw new NotImplementedException();
+        // Stuck: not sure how I can determine
+        // a train journey is complete given the data in DriverAndDelayDetails.txt
+        throw new NotImplementedException();
 
-            }
-        }
-        return completedJourneys;
+        //        for (Departure departure : this.departures) {
+//            for (Departure dep : this.departures) {
+
+//            }
+//        }
+//        return completedJourneys;
     }
 
     private void loadFileData(File file) {
@@ -69,5 +74,14 @@ public class DepartureFeed {
         }
     }
 
+    public List<Departure> getDepartures() {
+        return departures;
+    }
 
+    public DriverTable getDriverTable() {
+        if(this.driverTable == null) {
+            this.driverTable = new DriverTable();
+        }
+        return this.driverTable;
+    }
 }
