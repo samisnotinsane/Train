@@ -3,21 +3,28 @@ package info.sameen.database;
 import info.sameen.model.Departure;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DriverTable {
 
-    private MySqlApi db;
+    private DatabaseAPI db;
     private List<Departure> rows;
 
     public DriverTable() {
         // Read all rows from driver_details table and store them in <code>rows</code>.
+        this.rows = new ArrayList<>();
+        loadRowsFromDb();
+    }
+
+    private void loadRowsFromDb() {
+
 
     }
 
     public Departure getRow(int i) {
         int index = 0;
-        for(Departure row : rows) {
+        for(Departure row : this.rows) {
             if(index == i)
                 return row;
             index++;
@@ -36,7 +43,7 @@ public class DriverTable {
 
 
     public void initialiseDbConn() throws SQLException {
-        this.db = new MySqlApi();
+        this.db = new DatabaseAPI();
     }
 
 }

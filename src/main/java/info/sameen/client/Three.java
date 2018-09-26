@@ -18,14 +18,14 @@ public class Three {
 
         // Only keep [train_id, station, departure_time, departure_lateness] fields
         List<String> filteredFields = new ArrayList<>();
-        try {
-            depFeed.initialiseDbConn();
-            for (Departure lateDep : lateDepartures) {
-                depFeed.insertDbDelay(lateDep);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            depFeed.initialiseDbConn();
+//            for (Departure lateDep : lateDepartures) {
+//                depFeed.insertDbDelay(lateDep);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

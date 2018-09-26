@@ -1,18 +1,20 @@
-import info.sameen.model.Departure;
+import info.sameen.database.DatabaseAPI;
 import info.sameen.model.DepartureFeed;
 import org.junit.*;
 
-import java.util.List;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
 public class JDBCTest {
 
     DepartureFeed feed;
+    DatabaseAPI db;
 
     @Before
     public void setUp() {
         this.feed = new DepartureFeed();
+        this.db = new DatabaseAPI();
     }
 
     @Test
@@ -48,6 +50,25 @@ public class JDBCTest {
 
         assertEquals("120",
                 feed.getDepartures().get(6).getDepartureLateness());
+    }
+
+    @Test
+    public void testConnectToDb() {
+        try {
+            assertEquals(true, this.db.connect());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testDisconnectToDb() {
+        try {
+            this.db.connect();
+            assertEquals(false, this.db.disconnect());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
