@@ -22,7 +22,7 @@ public class DriverTable {
         try {
             List<String[]> rawRows = this.db.getAllDriverDetailsRows();
             for (String[] rawRow : rawRows) {
-                // [train_id, station, driver_name, journey_status]
+                // [train_id, from_station, to_station, driver_name, journey_status]
                 this.rows.add(
                         new Departure(
                                 rawRow[0], rawRow[1], null, rawRow[2], null

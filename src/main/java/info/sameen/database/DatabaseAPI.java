@@ -41,23 +41,27 @@ public class DatabaseAPI {
         List<String[]> rows = new ArrayList<>();
 
         this.connect();
-        String sqlString = "SELECT train_id, station, driver_name, journey_status FROM train_driver_details";
+        String sqlString = "SELECT train_id, from_station, to_station, driver_name, journey_status " +
+                        "FROM train_driver_details";
+
         try(Connection connection = this.connection;
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlString)) {
 
             while(resultSet.next()) {
-                String[] row = new String[4];
+                String[] row = new String[5];
 
                 String trainId = resultSet.getString("train_id");
-                String station = resultSet.getString("station");
+                String fromStation = resultSet.getString("from_station");
+                String toStation = resultSet.getString("to_station");
                 String driverName = resultSet.getString("driver_name");
                 String journeyStatus = resultSet.getString("journey_status");
 
                 row[0] = trainId;
-                row[1] = station;
-                row[2] = driverName;
-                row[3] = journeyStatus;
+                row[1] = fromStation;
+                row[2] = toStation;
+                row[3] = driverName;
+                row[4] = journeyStatus;
 
                 rows.add(row);
             }
