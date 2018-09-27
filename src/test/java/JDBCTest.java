@@ -1,5 +1,8 @@
 import info.sameen.database.DatabaseAPI;
+import info.sameen.database.DriverTable;
+import info.sameen.model.Departure;
 import info.sameen.model.DepartureFeed;
+import info.sameen.model.TrainJourney;
 import org.junit.*;
 
 import java.sql.SQLException;
@@ -8,13 +11,15 @@ import static org.junit.Assert.*;
 
 public class JDBCTest {
 
-    DepartureFeed feed;
+    DepartureFeed feed; // text file data
+//    DriverTable driverTable; // train_driver_details table
     DatabaseAPI db;
 
     @Before
     public void setUp() {
         this.feed = new DepartureFeed();
         this.db = new DatabaseAPI();
+//        this.driverTable = new DriverTable();
     }
 
     @Test
@@ -92,11 +97,37 @@ public class JDBCTest {
     @Test
     public void testDriverDBName() {
 
-        assertEquals("John Scott",
+        assertEquals("John Major",
                 feed.getDriverTable().getRow(0).getDriverName());
     }
 
+    @Test
+    public void testInsertDriverDBApi() {
+        Departure departure = this.feed.getDepartures().get(0);
+        TrainJourney journey = new TrainJourney(departure, "TO_STATION_TEST", "TEST_COMPLETE");
+        String[] record = new String[5];
+        record[0] = journey.getTrainId();
+        record[1] = journey.getStation();
+        record[2] = journey.getToStation();
+        record[3] = journey.getDriverName();
+        record[4] = journey.getJourneyStatus();
+        boolean isInserted = false;
+        try {
+            isInserted = this.db.putDriverDetailsRecord(record); // TODO: implement API mid-layer.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        assertEquals(true, isInserted);
+    }
+
+    @Test
+    public void testInsertDriverDBRecord() {
+        Departure departure = feed.getDepartures().get(0);
+        TrainJourney journey = new TrainJourney(departure, "TEST", "TEST");
+        this.feed.getDriverTable().insertTrainJourney(journey);
+        assertEquals(null, -1);
+    }
 
 
 

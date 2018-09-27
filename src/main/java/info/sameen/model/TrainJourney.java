@@ -13,6 +13,14 @@ public class TrainJourney extends Departure {
         this.journeyStatus = journeyStatus;
     }
 
+    public TrainJourney(Departure departure, String toStation, String journeyStatus) {
+        super(departure.getTrainId(), departure.getStation(), departure.getDepartureTime(),
+                departure.getDriverName(), departure.getDepartureLateness());
+        this.toStation = toStation;
+        this.journeyStatus = journeyStatus;
+    }
+
+
     public String getToStation() {
         return toStation;
     }

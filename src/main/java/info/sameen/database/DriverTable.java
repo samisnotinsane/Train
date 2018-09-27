@@ -1,6 +1,7 @@
 package info.sameen.database;
 
 import info.sameen.model.Departure;
+import info.sameen.model.TrainJourney;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,23 +10,26 @@ import java.util.List;
 public class DriverTable {
 
     private DatabaseAPI db;
-    private List<Departure> rows;
+    private List<TrainJourney> rows;
 
     public DriverTable() {
         // Read all rows from driver_details table and store them in <code>rows</code>.
         this.rows = new ArrayList<>();
+        this.db = new DatabaseAPI();
         loadRowsFromDb();
     }
 
     private void loadRowsFromDb() {
-        // TODO: Departure lateness is a questionable field in this context. Rethink.
+
         try {
-            List<String[]> rawRows = this.db.getAllDriverDetailsRows();
+            List<String[]> rawRows = this.db.getAllDriverDetailsRows(); // connects to db automatically
             for (String[] rawRow : rawRows) {
-                // [train_id, from_station, to_station, driver_name, journey_status]
+                // rawRow: [train_id, from_station, to_station, driver_name, journey_status]
                 this.rows.add(
-                        new Departure(
-                                rawRow[0], rawRow[1], null, rawRow[2], null
+                        new TrainJourney(
+                                rawRow[0], rawRow[1], rawRow[2],
+                                null, rawRow[3], null,
+                                rawRow[4]
                         )
                 );
             }
@@ -60,4 +64,7 @@ public class DriverTable {
         this.db = new DatabaseAPI();
     }
 
+    public void insertTrainJourney(TrainJourney journey) {
+
+    }
 }

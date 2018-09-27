@@ -40,7 +40,8 @@ public class DatabaseAPI {
     public List<String[]> getAllDriverDetailsRows() throws SQLException {
         List<String[]> rows = new ArrayList<>();
 
-        this.connect();
+        this.connect(); // initiate connection to db if not already connected.
+
         String sqlString = "SELECT train_id, from_station, to_station, driver_name, journey_status " +
                         "FROM train_driver_details";
 
@@ -72,5 +73,28 @@ public class DatabaseAPI {
 
     public void insert_delay(String train_id, String station, String departure_time, String departure_lateness) {
         throw new NotImplementedException();
+    }
+
+    public boolean putDriverDetailsRecord(String[] record) throws SQLException {
+        // TODO: Untested method!
+        String sqlString = "INSERT INTO train_driver_details(train_id, from_station, to_station, " +
+                "driver_name, journey_status) VALUES(?,?,?,?,?)";
+
+        this.connect();
+
+        try(Connection connection = this.connection;
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
+
+            preparedStatement.setString(1, record[0]); // train_id
+            preparedStatement.setString(2, record[1]); // from_station
+            preparedStatement.setString(3, record[2]); // to_station
+            preparedStatement.setString(4, record[3]); // driver_name
+            preparedStatement.setString(5, record[4]); // journey_status
+
+            preparedStatement.executeUpdate();
+        }
+
+
+        return false;
     }
 }
