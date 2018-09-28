@@ -38,9 +38,9 @@ public class DriverTable {
         }
     }
 
-    public Departure getRow(int i) {
+    public TrainJourney getRow(int i) {
         int index = 0;
-        for(Departure row : this.rows) {
+        for(TrainJourney row : this.rows) {
             if(index == i)
                 return row;
             index++;

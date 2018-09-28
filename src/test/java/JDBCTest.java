@@ -97,28 +97,8 @@ public class JDBCTest {
     @Test
     public void testDriverDBName() {
 
-        assertEquals("John Major",
+        assertEquals("John Scott",
                 feed.getDriverTable().getRow(0).getDriverName());
-    }
-
-    @Test
-    public void testInsertDriverDBApi() {
-        Departure departure = this.feed.getDepartures().get(0);
-        TrainJourney journey = new TrainJourney(departure, "TO_STATION_TEST", "TEST_COMPLETE");
-        String[] record = new String[5];
-        record[0] = journey.getTrainId();
-        record[1] = journey.getStation();
-        record[2] = journey.getToStation();
-        record[3] = journey.getDriverName();
-        record[4] = journey.getJourneyStatus();
-        boolean isInserted = false;
-        try {
-            isInserted = this.db.putDriverDetailsRecord(record); // TODO: implement API mid-layer.
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        assertEquals(true, isInserted);
     }
 
     @Test
@@ -126,7 +106,41 @@ public class JDBCTest {
         Departure departure = feed.getDepartures().get(0);
         TrainJourney journey = new TrainJourney(departure, "TEST", "TEST");
         this.feed.getDriverTable().insertTrainJourney(journey);
-        assertEquals(null, -1);
+    }
+
+    @Test
+    public void testDriverTableTrainIdRetrival() {
+        TrainJourney journey = this.feed.getDriverTable().getRow(0);
+
+        assertEquals("2F29", journey.getTrainId());
+    }
+
+    @Test
+    public void testDriverTableFromStationRetrival() {
+        TrainJourney journey = this.feed.getDriverTable().getRow(0);
+
+        assertEquals("London Waterloo", journey.getStation());
+    }
+
+    @Test
+    public void testDriverTableToStationRetrival() {
+        TrainJourney journey = this.feed.getDriverTable().getRow(0);
+
+        assertEquals("TEST", journey.getToStation());
+    }
+
+    @Test
+    public void testDriverTableDriverNameRetrival() {
+        TrainJourney journey = this.feed.getDriverTable().getRow(0);
+
+        assertEquals("John Scott", journey.getDriverName());
+    }
+
+    @Test
+    public void testDriverTableJourneyStatusRetrival() {
+        TrainJourney journey = this.feed.getDriverTable().getRow(0);
+
+        assertEquals("TEST", journey.getJourneyStatus());
     }
 
 
