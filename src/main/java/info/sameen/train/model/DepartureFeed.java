@@ -16,7 +16,6 @@ public class DepartureFeed {
 
     public DepartureFeed() {
         this.departures = new ArrayList<>();
-        loadFileData(new File("dat/DriverAndDelayDetails.txt"));
     }
 
     public List<Departure> lateDepartures() {
@@ -51,6 +50,13 @@ public class DepartureFeed {
 //        return completedJourneys;
     }
 
+    private DepartureFeed loadFeed() {
+        if (this.departures.isEmpty()) {
+            loadFileData(new File("dat/DriverAndDelayDetails.txt"));
+        }
+        return this;
+    }
+
     private void loadFileData(File file) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
@@ -80,5 +86,11 @@ public class DepartureFeed {
         return this.driverTable;
     }
 
+    public DelayTable getDelayTable() {
+        if (this.delayTable == null) {
+            this.delayTable = new DelayTable();
+        }
+        return this.delayTable;
+    }
 
 }
