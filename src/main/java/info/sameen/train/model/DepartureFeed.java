@@ -50,7 +50,7 @@ public class DepartureFeed {
 //        return completedJourneys;
     }
 
-    private DepartureFeed loadFeed() {
+    public DepartureFeed loadFeed() {
         if (this.departures.isEmpty()) {
             loadFileData(new File("dat/DriverAndDelayDetails.txt"));
         }

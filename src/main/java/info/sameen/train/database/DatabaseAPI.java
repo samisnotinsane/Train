@@ -37,7 +37,7 @@ public class DatabaseAPI {
         return this.isConnected;
     }
 
-    public List<String[]> getAllDriverDetailsRow() throws SQLException {
+    public List<String[]> getAllDriverRow() throws SQLException {
         List<String[]> rows = new ArrayList<>();
         this.connect(); // initiate connection to db if not already connected.
 
@@ -68,7 +68,7 @@ public class DatabaseAPI {
         return rows;
     }
 
-    public void putDriverDetailsRow(String[] record) throws SQLException {
+    public void putDriverRow(String[] record) throws SQLException {
         String sqlString = "INSERT INTO train_driver_details(train_id, from_station, to_station, " +
                 "driver_name, journey_status) VALUES(?,?,?,?,?)";
 
@@ -83,5 +83,10 @@ public class DatabaseAPI {
         preparedStatement.setString(5, record[4]); // journey_status
 
         preparedStatement.executeUpdate();
+    }
+
+    public List<String[]> getAllDelayRows() throws SQLException {
+
+        return null;
     }
 }

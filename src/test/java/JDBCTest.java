@@ -18,6 +18,7 @@ public class JDBCTest {
     public void setUp() {
         this.feed = new DepartureFeed();
         this.db = new DatabaseAPI();
+        this.feed.loadFeed();
 //        this.driverTable = new DriverTable();
     }
 
@@ -79,7 +80,7 @@ public class JDBCTest {
     public void testDriverDBApiStation() {
         String[] row = new String[4]; // [train_id, station, driver_name, journey_status]
         try {
-            row = this.db.getAllDriverDetailsRow().get(0);
+            row = this.db.getAllDriverRow().get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,6 +143,12 @@ public class JDBCTest {
         assertEquals("TEST", journey.getJourneyStatus());
     }
 
+    @Test
+    public void testDelayTableReadTrainId() {
+        Departure departure = this.feed.getDelayTable().getRow(0);
+
+        assertEquals("2F29", departure.getTrainId());
+    }
 
 
 }

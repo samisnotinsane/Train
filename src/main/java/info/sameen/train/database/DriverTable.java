@@ -21,7 +21,7 @@ public class DriverTable {
 
     private void loadRowsFromDb() {
         try {
-            List<String[]> rawRows = this.db.getAllDriverDetailsRow(); // connects to db automatically
+            List<String[]> rawRows = this.db.getAllDriverRow(); // connects to db automatically
             for (String[] rawRow : rawRows) {
                 // rawRow: [train_id, from_station, to_station, driver_name, journey_status]
                 this.rows.add(
@@ -73,7 +73,7 @@ public class DriverTable {
         record[3] = journey.getDriverName();
         record[4] = journey.getJourneyStatus();
         try {
-            this.db.putDriverDetailsRow(record);
+            this.db.putDriverRow(record);
         } catch (SQLException e) {
             e.printStackTrace();
         }
