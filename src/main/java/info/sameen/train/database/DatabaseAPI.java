@@ -107,7 +107,7 @@ public class DatabaseAPI {
     }
 
     public void putDelayRow(String[] record) throws SQLException {
-        String sqlString = "INSERT INTO train_driver_details(train_id, station, departure_time_at_station, departure_lateness_in_seconds) VALUES(?,?,?,?)";
+        String sqlString = "INSERT INTO train_delay_details(train_id, station, departure_time_at_station, departure_lateness_in_seconds) VALUES(?,?,?,?)";
         this.connect();
         Connection connection = this.connection;
         PreparedStatement preparedStatement = connection.prepareStatement(sqlString);
