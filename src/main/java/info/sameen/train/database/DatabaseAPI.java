@@ -12,9 +12,6 @@ public class DatabaseAPI {
     private final String URL = "jdbc:sqlite:dat/train.db";
 
     private Connection connection = null;
-    private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
     private boolean isConnected;
 
     public DatabaseAPI() {
@@ -86,7 +83,29 @@ public class DatabaseAPI {
     }
 
     public List<String[]> getAllDelayRows() throws SQLException {
+        List<String[]> rows = new ArrayList<>();
+        this.connect();
 
-        return null;
+        String sqlString = "SELECT train_id, station, departure_time_at_station, departure_lateness_in_seconds " +
+                "FROM train_delay_details";
+        Connection connection = this.connection;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sqlString);
+        while (resultSet.next()) {
+            String[] row = new String[4];
+
+            String trainId = resultSet.getString("train_id");
+            String station = resultSet.getString("station");
+            String depTime = resultSet.getString("departure_time_at_station");
+            String depLate = resultSet.getString("departure_lateness_in_seconds");
+
+            row[0] = trainId;
+            row[1] = station;
+            row[2] = depTime;
+            row[3] = depLate;
+
+            rows.add(row);
+        }
+        return rows;
     }
 }
