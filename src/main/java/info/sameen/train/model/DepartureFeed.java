@@ -30,24 +30,30 @@ public class DepartureFeed {
         return lateDepartures;
     }
 
-    /**
-     * Caution: This method is not yet functional.
-     * @deprecated
-     * @return
-     */
-    public List<Departure> completedJourneys() {
-        List<Departure> completedJourneys = new ArrayList<>();
+    public List<TrainJourney> computeTrainJourneys() {
+        List<TrainJourney> trainJourneys = new ArrayList<>();
+        for (Departure departure : this.departures) {
+            String toStation = "";
+            String journeyStatus = null;
+            if (departure.getDepartureLateness().equals("NA")) {
+                toStation = departure.getStation();
+                journeyStatus = "COMPLETE";
+            } else {
+                journeyStatus = "INCOMPLETE";
+            }
+            TrainJourney trainJourney = new TrainJourney(departure, toStation, journeyStatus);
+            trainJourneys.add(trainJourney);
+        }
+        return trainJourneys;
+    }
 
-        // Stuck: not sure how I can determine
-        // a train journey is complete given the data in DriverAndDelayDetails.txt
-        throw new NotImplementedException();
+    public void insertDriverFeed() {
+        List<TrainJourney> journeys = this.computeTrainJourneys();
+        this.getDriverTable().writeFeed(journeys);
+    }
 
-        //        for (Departure departure : this.departures) {
-//            for (Departure dep : this.departures) {
-
-//            }
-//        }
-//        return completedJourneys;
+    public void insertDelayFeed() {
+        this.getDelayTable().writeFeed(this.departures);
     }
 
     public DepartureFeed loadFeed() {

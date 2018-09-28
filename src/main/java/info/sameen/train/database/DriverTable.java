@@ -2,6 +2,7 @@ package info.sameen.train.database;
 
 import info.sameen.train.model.Departure;
 import info.sameen.train.model.TrainJourney;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -48,19 +49,6 @@ public class DriverTable {
         return null;
     }
 
-    /**
-     * @deprecated
-     * @param d
-     */
-    public void insertDbDelay(Departure d) {
-        String train_id = d.getTrainId();
-        String station = d.getStation();
-        String departure_time = d.getDepartureTime();
-        String departure_lateness = d.getDepartureLateness();
-//        this.db.insert_delay(train_id, station, departure_time, departure_lateness);
-    }
-
-
     public void initialiseDbConn() throws SQLException {
         this.db = new DatabaseAPI();
     }
@@ -77,5 +65,9 @@ public class DriverTable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void writeFeed(List<TrainJourney> trainJourneys) {
+        throw new NotImplementedException();
     }
 }

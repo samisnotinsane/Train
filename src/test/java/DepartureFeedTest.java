@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
-public class JDBCTest {
+public class DepartureFeedTest {
 
     DepartureFeed feed; // text file data
 //    DriverTable driverTable; // train_driver_details table
