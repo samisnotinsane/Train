@@ -68,6 +68,8 @@ public class DriverTable {
     }
 
     public void writeFeed(List<TrainJourney> trainJourneys) {
-        throw new NotImplementedException();
+        for (TrainJourney trainJourney : trainJourneys) {
+            this.insertTrainJourney(trainJourney);
+        }
     }
 }
