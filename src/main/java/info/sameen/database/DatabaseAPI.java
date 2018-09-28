@@ -68,7 +68,7 @@ public class DatabaseAPI {
         return rows;
     }
 
-    public void putDriverDetailsRecord(String[] record) throws SQLException {
+    public void putDriverDetailsRow(String[] record) throws SQLException {
         String sqlString = "INSERT INTO train_driver_details(train_id, from_station, to_station, " +
                 "driver_name, journey_status) VALUES(?,?,?,?,?)";
 

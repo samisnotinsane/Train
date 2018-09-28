@@ -70,7 +70,7 @@ public class DriverTable {
         record[3] = journey.getDriverName();
         record[4] = journey.getJourneyStatus();
         try {
-            this.db.putDriverDetailsRecord(record);
+            this.db.putDriverDetailsRow(record);
         } catch (SQLException e) {
             e.printStackTrace();
         }
