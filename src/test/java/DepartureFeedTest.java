@@ -10,16 +10,14 @@ import static org.junit.Assert.*;
 
 public class DepartureFeedTest {
 
-    DepartureFeed feed; // text file data
-//    DriverTable driverTable; // train_driver_details table
-    DatabaseAPI db;
+    private DepartureFeed feed; // text file data
+    private DatabaseAPI db; // JDBC DAO
 
     @Before
     public void setUp() {
         this.feed = new DepartureFeed();
         this.db = new DatabaseAPI();
         this.feed.loadFeed();
-//        this.driverTable = new DriverTable();
     }
 
     @Test
@@ -58,25 +56,6 @@ public class DepartureFeedTest {
     }
 
     @Test
-    public void testConnectToDb() {
-        try {
-            assertEquals(true, this.db.connect());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testDisconnectToDb() {
-        try {
-            this.db.connect();
-            assertEquals(false, this.db.disconnect());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     public void testDriverDBApiStation() {
         String[] row = new String[4]; // [train_id, station, driver_name, journey_status]
         try {
@@ -102,13 +81,6 @@ public class DepartureFeedTest {
     }
 
     @Test
-    public void testInsertDriverDBRecord() {
-        Departure departure = feed.getDepartures().get(0);
-        TrainJourney journey = new TrainJourney(departure, "TEST", "TEST");
-        this.feed.getDriverTable().insertTrainJourney(journey);
-    }
-
-    @Test
     public void testDriverTableTrainIdRetrival() {
         TrainJourney journey = this.feed.getDriverTable().getRow(0);
 
@@ -124,9 +96,9 @@ public class DepartureFeedTest {
 
     @Test
     public void testDriverTableToStationRetrival() {
-        TrainJourney journey = this.feed.getDriverTable().getRow(0);
+        TrainJourney journey = this.feed.getDriverTable().getRow(12);
 
-        assertEquals("TEST", journey.getToStation());
+        assertEquals("Guildford", journey.getToStation());
     }
 
     @Test
@@ -140,13 +112,7 @@ public class DepartureFeedTest {
     public void testDriverTableJourneyStatusRetrival() {
         TrainJourney journey = this.feed.getDriverTable().getRow(0);
 
-        assertEquals("TEST", journey.getJourneyStatus());
-    }
-
-    @Test
-    public void testDelayTableInsertRow() {
-        Departure departure = feed.getDepartures().get(0);
-        this.feed.getDelayTable().insertDeparture(departure);
+        assertEquals("INCOMPLETE", journey.getJourneyStatus());
     }
 
     @Test
