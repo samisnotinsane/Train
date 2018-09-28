@@ -56,4 +56,10 @@ public class DelayTable {
             e.printStackTrace();
         }
     }
+
+    public void writeFeed(List<Departure> departures) {
+        for (Departure departure : departures) {
+            this.insertDeparture(departure);
+        }
+    }
 }
