@@ -20,7 +20,6 @@ public class DriverTable {
     }
 
     private void loadRowsFromDb() {
-
         try {
             List<String[]> rawRows = this.db.getAllDriverDetailsRows(); // connects to db automatically
             for (String[] rawRow : rawRows) {
@@ -37,7 +36,6 @@ public class DriverTable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Departure getRow(int i) {
@@ -65,6 +63,16 @@ public class DriverTable {
     }
 
     public void insertTrainJourney(TrainJourney journey) {
-
+        String[] record = new String[5];
+        record[0] = journey.getTrainId();
+        record[1] = journey.getStation();
+        record[2] = journey.getToStation();
+        record[3] = journey.getDriverName();
+        record[4] = journey.getJourneyStatus();
+        try {
+            this.db.putDriverDetailsRecord(record);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

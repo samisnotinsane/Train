@@ -39,35 +39,32 @@ public class DatabaseAPI {
 
     public List<String[]> getAllDriverDetailsRows() throws SQLException {
         List<String[]> rows = new ArrayList<>();
-
         this.connect(); // initiate connection to db if not already connected.
 
         String sqlString = "SELECT train_id, from_station, to_station, driver_name, journey_status " +
                         "FROM train_driver_details";
 
-        try(Connection connection = this.connection;
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlString)) {
+        Connection connection = this.connection;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sqlString);
 
-            while(resultSet.next()) {
-                String[] row = new String[5];
+        while(resultSet.next()) {
+            String[] row = new String[5];
 
-                String trainId = resultSet.getString("train_id");
-                String fromStation = resultSet.getString("from_station");
-                String toStation = resultSet.getString("to_station");
-                String driverName = resultSet.getString("driver_name");
-                String journeyStatus = resultSet.getString("journey_status");
+            String trainId = resultSet.getString("train_id");
+            String fromStation = resultSet.getString("from_station");
+            String toStation = resultSet.getString("to_station");
+            String driverName = resultSet.getString("driver_name");
+            String journeyStatus = resultSet.getString("journey_status");
 
-                row[0] = trainId;
-                row[1] = fromStation;
-                row[2] = toStation;
-                row[3] = driverName;
-                row[4] = journeyStatus;
+            row[0] = trainId;
+            row[1] = fromStation;
+            row[2] = toStation;
+            row[3] = driverName;
+            row[4] = journeyStatus;
 
-                rows.add(row);
-            }
+            rows.add(row);
         }
-
         return rows;
     }
 
@@ -75,26 +72,20 @@ public class DatabaseAPI {
         throw new NotImplementedException();
     }
 
-    public boolean putDriverDetailsRecord(String[] record) throws SQLException {
-        // TODO: Untested method!
+    public void putDriverDetailsRecord(String[] record) throws SQLException {
         String sqlString = "INSERT INTO train_driver_details(train_id, from_station, to_station, " +
                 "driver_name, journey_status) VALUES(?,?,?,?,?)";
 
         this.connect();
 
-        try(Connection connection = this.connection;
-        PreparedStatement preparedStatement = connection.prepareStatement(sqlString)) {
+        Connection connection = this.connection;
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlString);
+        preparedStatement.setString(1, record[0]); // train_id
+        preparedStatement.setString(2, record[1]); // from_station
+        preparedStatement.setString(3, record[2]); // to_station
+        preparedStatement.setString(4, record[3]); // driver_name
+        preparedStatement.setString(5, record[4]); // journey_status
 
-            preparedStatement.setString(1, record[0]); // train_id
-            preparedStatement.setString(2, record[1]); // from_station
-            preparedStatement.setString(3, record[2]); // to_station
-            preparedStatement.setString(4, record[3]); // driver_name
-            preparedStatement.setString(5, record[4]); // journey_status
-
-            preparedStatement.executeUpdate();
-        }
-
-
-        return false;
+        preparedStatement.executeUpdate();
     }
 }
