@@ -1,7 +1,7 @@
-package info.sameen.database;
+package info.sameen.train.database;
 
-import info.sameen.model.Departure;
-import info.sameen.model.TrainJourney;
+import info.sameen.train.model.Departure;
+import info.sameen.train.model.TrainJourney;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class DriverTable {
 
     private void loadRowsFromDb() {
         try {
-            List<String[]> rawRows = this.db.getAllDriverDetailsRows(); // connects to db automatically
+            List<String[]> rawRows = this.db.getAllDriverDetailsRow(); // connects to db automatically
             for (String[] rawRow : rawRows) {
                 // rawRow: [train_id, from_station, to_station, driver_name, journey_status]
                 this.rows.add(
@@ -48,13 +48,16 @@ public class DriverTable {
         return null;
     }
 
+    /**
+     * @deprecated
+     * @param d
+     */
     public void insertDbDelay(Departure d) {
         String train_id = d.getTrainId();
         String station = d.getStation();
         String departure_time = d.getDepartureTime();
         String departure_lateness = d.getDepartureLateness();
-
-        this.db.insert_delay(train_id, station, departure_time, departure_lateness);
+//        this.db.insert_delay(train_id, station, departure_time, departure_lateness);
     }
 
 

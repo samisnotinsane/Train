@@ -1,6 +1,6 @@
-import info.sameen.model.Demand;
+import info.sameen.train.model.Demand;
 
-import info.sameen.model.DemandTable;
+import info.sameen.train.model.DemandTable;
 import org.junit.*;
 
 import static org.junit.Assert.*;

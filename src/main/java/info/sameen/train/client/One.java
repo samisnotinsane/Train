@@ -1,6 +1,6 @@
-package info.sameen.client;
+package info.sameen.train.client;
 
-import info.sameen.model.TrainFeed;
+import info.sameen.train.model.TrainFeed;
 
 import java.io.IOException;
 import java.util.Scanner;

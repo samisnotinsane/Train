@@ -1,4 +1,4 @@
-package info.sameen.database;
+package info.sameen.train.database;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -37,7 +37,7 @@ public class DatabaseAPI {
         return this.isConnected;
     }
 
-    public List<String[]> getAllDriverDetailsRows() throws SQLException {
+    public List<String[]> getAllDriverDetailsRow() throws SQLException {
         List<String[]> rows = new ArrayList<>();
         this.connect(); // initiate connection to db if not already connected.
 

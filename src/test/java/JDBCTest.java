@@ -1,8 +1,7 @@
-import info.sameen.database.DatabaseAPI;
-import info.sameen.database.DriverTable;
-import info.sameen.model.Departure;
-import info.sameen.model.DepartureFeed;
-import info.sameen.model.TrainJourney;
+import info.sameen.train.database.DatabaseAPI;
+import info.sameen.train.model.Departure;
+import info.sameen.train.model.DepartureFeed;
+import info.sameen.train.model.TrainJourney;
 import org.junit.*;
 
 import java.sql.SQLException;
@@ -80,7 +79,7 @@ public class JDBCTest {
     public void testDriverDBApiStation() {
         String[] row = new String[4]; // [train_id, station, driver_name, journey_status]
         try {
-            row = this.db.getAllDriverDetailsRows().get(0);
+            row = this.db.getAllDriverDetailsRow().get(0);
         } catch (SQLException e) {
             e.printStackTrace();
         }

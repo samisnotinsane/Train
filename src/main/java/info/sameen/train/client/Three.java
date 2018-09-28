@@ -1,9 +1,8 @@
-package info.sameen.client;
+package info.sameen.train.client;
 
-import info.sameen.model.Departure;
-import info.sameen.model.DepartureFeed;
+import info.sameen.train.model.Departure;
+import info.sameen.train.model.DepartureFeed;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

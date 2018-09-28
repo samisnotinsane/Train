@@ -1,11 +1,10 @@
-package info.sameen.model;
+package info.sameen.train.model;
 
-import info.sameen.database.DriverTable;
+import info.sameen.train.database.DelayTable;
+import info.sameen.train.database.DriverTable;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,15 +12,11 @@ public class DepartureFeed {
 
     private List<Departure> departures;
     private DriverTable driverTable;
+    private DelayTable delayTable;
 
     public DepartureFeed() {
         this.departures = new ArrayList<>();
-
         loadFileData(new File("dat/DriverAndDelayDetails.txt"));
-
-//        for (Departure departure : this.departures) {
-//            System.out.println(departure.toString());
-//        }
     }
 
     public List<Departure> lateDepartures() {
@@ -84,4 +79,6 @@ public class DepartureFeed {
         }
         return this.driverTable;
     }
+
+
 }
