@@ -144,6 +144,12 @@ public class JDBCTest {
     }
 
     @Test
+    public void testDelayTableInsertRow() {
+        Departure departure = feed.getDepartures().get(0);
+        this.feed.getDelayTable().insertDeparture(departure);
+    }
+
+    @Test
     public void testDelayTableReadTrainId() {
         Departure departure = this.feed.getDelayTable().getRow(0);
 

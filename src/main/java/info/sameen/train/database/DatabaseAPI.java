@@ -1,11 +1,8 @@
 package info.sameen.train.database;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class DatabaseAPI {
 
@@ -107,5 +104,18 @@ public class DatabaseAPI {
             rows.add(row);
         }
         return rows;
+    }
+
+    public void putDelayRow(String[] record) throws SQLException {
+        String sqlString = "INSERT INTO train_driver_details(train_id, station, departure_time_at_station, departure_lateness_in_seconds) VALUES(?,?,?,?)";
+        this.connect();
+        Connection connection = this.connection;
+        PreparedStatement preparedStatement = connection.prepareStatement(sqlString);
+        preparedStatement.setString(1, record[0]);
+        preparedStatement.setString(2, record[1]);
+        preparedStatement.setString(3, record[2]);
+        preparedStatement.setString(4, record[3]);
+
+        preparedStatement.executeUpdate();
     }
 }

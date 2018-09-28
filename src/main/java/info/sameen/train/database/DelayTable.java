@@ -34,8 +34,26 @@ public class DelayTable {
 
     }
 
-
     public Departure getRow(int i) {
-        throw new NotImplementedException();
+        int index = 0;
+        for(Departure row : this.rows) {
+            if(index == i)
+                return row;
+            index++;
+        }
+        return null;
+    }
+
+    public void insertDeparture(Departure departure) {
+        String[] record = new String[4];
+        record[0] = departure.getTrainId();
+        record[1] = departure.getStation();
+        record[2] = departure.getDepartureTime();
+        record[3] = departure.getDepartureLateness();
+        try {
+            this.db.putDelayRow(record);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
