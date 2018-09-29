@@ -9,22 +9,16 @@ import java.util.List;
 public class Three {
 
     public static void main(String[] args) {
-        // Caution: JDBC methods are not yet implemented,
-        // this code is not yet functional.
-
-        DepartureFeed depFeed = new DepartureFeed();
-//        List<Departure> lateDepartures = depFeed.lateDepartures();
-
-        // Only keep [train_id, station, departure_time, departure_lateness] fields
-        List<String> filteredFields = new ArrayList<>();
-//        try {
-//            depFeed.initialiseDbConn();
-//            for (Departure lateDep : lateDepartures) {
-//                depFeed.insertDbDelay(lateDep);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        System.out.print("Loading feed from text file...");
+        DepartureFeed feed = new DepartureFeed().loadFeed();
+        System.out.print("[OK]\n");
+        System.out.print("Inserting data into train_driver_details table in db...");
+        feed.insertDriverFeed();
+        System.out.print("[OK]\n");
+        System.out.print("Inserting data into train_delay_details table in db...");
+        feed.insertDelayFeed();
+        System.out.print("[OK]\n");
+        System.out.print("Complete!\n");
     }
 
 }
