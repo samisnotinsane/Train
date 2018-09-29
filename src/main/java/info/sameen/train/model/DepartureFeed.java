@@ -18,23 +18,11 @@ public class DepartureFeed {
         this.departures = new ArrayList<>();
     }
 
-    public List<Departure> lateDepartures() {
-        List<Departure> lateDepartures = new ArrayList<>();
-
-        for(Departure d : this.departures) {
-            if (!d.getDepartureLateness().equals("NA")) {
-                lateDepartures.add(d);
-            }
-        }
-
-        return lateDepartures;
-    }
-
-    public List<TrainJourney> computeTrainJourneys() {
+    private List<TrainJourney> computeTrainJourneys() {
         List<TrainJourney> trainJourneys = new ArrayList<>();
         for (Departure departure : this.departures) {
             String toStation = "";
-            String journeyStatus = null;
+            String journeyStatus;
             if (departure.getDepartureLateness().equals("NA")) {
                 toStation = departure.getStation();
                 journeyStatus = "COMPLETE";

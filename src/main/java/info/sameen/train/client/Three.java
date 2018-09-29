@@ -13,7 +13,7 @@ public class Three {
         // this code is not yet functional.
 
         DepartureFeed depFeed = new DepartureFeed();
-        List<Departure> lateDepartures = depFeed.lateDepartures();
+//        List<Departure> lateDepartures = depFeed.lateDepartures();
 
         // Only keep [train_id, station, departure_time, departure_lateness] fields
         List<String> filteredFields = new ArrayList<>();
